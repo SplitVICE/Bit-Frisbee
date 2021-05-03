@@ -1,0 +1,2 @@
+To put application in dev mode:
+/frontend/src/store/index.js -> change "serverHost" variable to be the one that includes localhost link.
