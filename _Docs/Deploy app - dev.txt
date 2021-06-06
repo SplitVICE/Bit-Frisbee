@@ -1,28 +1,28 @@
 Change /backend/.env.template file to /backend/.env and fill required parameters:
 
-PORT= example:4000 . Recommended port is 4000 for development.
+PORT= example:4000 . Recommended port is 4000 FOR development.
 EXPRESS_SESSION_SECRET= a strong session key
 SHOW_FILES_STORED= receives a boolean. true/false . Will show all files stored on server.
-DOMAIN= example: http://localhost:<same value as PORT> . Domain where application runs. Needed to build files paths.
+USE_HTTPS= receives a boolean true/false . To set if HTTPS is being used.
 
 Complete example of .env file:
 
 PORT=4000
 EXPRESS_SESSION_SECRET=l!AHGSwyUa2mL#tKuyE8jC&1XVlHFJR9%LdKQT*gwdsO3110EM
 SHOW_FILES_STORED=true
-DOMAIN=http://localhost:4000
+USE_HTTPS=false
 
 Install backend's modules with: "npm install"
-Run this command at being at backend's folder to run application: npm run dev
+To run application run this command being at backend's folder: npm run dev
 
 This application only needs backend project running to work. frontend project is just a project that was
-used to build a Vue frontend that is being used at /backend/src/public/
+used to build a Vue frontend that is being used at /backend/src/public/spa
 
 --- To run frontend application only:
 
 To run frontend application:
 Install frontend's modules with: "npm install"
-Run this command at being at frontend's folder to run application: npm run serve
+Run this command being at frontend's folder to run application: npm run serve
 
 Run this command to build frontend files onto /backend/src/public/: npm run build
 See /frontend/vue.config.js and /frontend/package.json to change settings on build.

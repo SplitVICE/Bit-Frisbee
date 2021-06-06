@@ -2,10 +2,10 @@
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
-[![N|Solid](https://dl.dropboxusercontent.com/s/4rkbkdirpmjdc81/viceReadmeMDImage.png?dl=0)](http://just-vice.com)
+[![N|Solid](https://dl.dropboxusercontent.com/s/oy06v7r8d871cr8/splitvice-banner.png?dl=0)](http://split-vice.com)
 
 
-A simple file hosting server. <a href="http://just-vice.com/technology/web-software/bit-frisbee/" target="_blank">Official website</a>
+A simple file hosting server. <a href="http://split-vice.com/technology/web-software/bit-frisbee/" target="_blank">Official website</a>
 
 <img src="./_Docs/Images/bit-frisbee-demo.png"/>
 
@@ -22,7 +22,7 @@ Uploaded files will be stored at `/backend/src/public/f/`
 # Web application setup
 
 - Download application from repository.
-- Go to `/backend/` and create `.env` file. Use `/backend/.env.template` to fill `.env` file with customized settings. (For developers) go to `/_Docs/Deploy app.txt` to read a more detailed guide to deploy the application.
+- Go to `/backend/` and create `.env` file. Use `/backend/.env.template` to fill `.env` file with customized settings. Go to `/_Docs/Deploy app.txt` to read a detailed guide to deploy the application.
 - For a quick application deployment, run `Start server.bat` file.
 - For manual application deployment: open a terminal at backend folder - run `npm install` command to install required modules and dependencies - when finished, run `npm run dev` command to start application server.
 
@@ -33,3 +33,6 @@ Bit Frisbee can be installed on PCs with Windows operating system by running the
 This is made by using node-windows module.
 
 To uninstall application `Uninstall Bit Frisbee.bat` should do the job.
+
+### Support?
+<a target="_blank" href="https://split-vice.com/send-message">Contact me</a>

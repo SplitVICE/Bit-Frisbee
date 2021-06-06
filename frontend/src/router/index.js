@@ -18,6 +18,11 @@ const routes = [
     path: '/files',
     name: 'Files',
     component: () => import('../views/Files.vue')
+  },
+  {
+    path: '/*',
+    name: '404',
+    component: () => import('../views/404.vue')
   }
 ]
 

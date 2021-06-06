@@ -18,7 +18,7 @@ export default new Vuex.Store({
       api_files: 'http://localhost:4000/api/files',
       api_uploaded_files_retrieve: 'http://localhost:4000/api/files/uploaded',
     },
-    application_version: "v1.0.0",
+    application_version: "v1.0.1",
   },
   mutations: {
   },

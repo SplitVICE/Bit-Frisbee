@@ -1,5 +1,5 @@
 // ========================================================================================
-// Constants declaration
+// CONSTANTS & SETTINGS
 // ========================================================================================
 const express = require("express"),
     router = express.Router(),
@@ -9,7 +9,8 @@ const express = require("express"),
     multer = require('multer'),
     uniqid = require('uniqid'),
     fileExtension = require('file-extension'),
-    files_path = path.join(__dirname, '../public/f/'); // Where files are stored.
+    localIpV4Address = require("local-ipv4-address"),
+    files_path = path.join(__dirname, '../public/f/'); // Where files are stored
 
 // Multer storage settings
 const storage = multer.diskStorage({
@@ -22,8 +23,25 @@ const storage = multer.diskStorage({
 // Multer middleware set
 const upload = multer({ storage: storage });
 
+let IPv4 = undefined;
+(async () => { IPv4 = await localIpV4Address() })()
+
 // ========================================================================================
-// Route functions
+// HELPER FUNCTIONS
+// ========================================================================================
+
+function get_port() {
+    if (env.PORT == '80') return '' // returns nothing if port is 80
+    else return env.PORT
+}
+
+function get_http_or_https() {
+    if (env.USE_HTTPS.toLowerCase() == 'true') return 'https://'
+    else return 'http://'
+}
+
+// ========================================================================================
+// ROUTE FUNCTIONS
 // ========================================================================================
 
 // Sends the links to access all files stored
@@ -31,13 +49,12 @@ router.get('/api/files/', async (req, res) => {
     if (env.SHOW_FILES_STORED.toLowerCase() != 'true') {
         res.status(200).json({ status: 'failed', description: 'files readability disabled' }); return;
     }
-    const file_names = fs.readdirSync(files_path),
-        files = [];
+    const file_names = fs.readdirSync(files_path), files = [], p = get_port(), http_s = get_http_or_https();
     file_names.forEach(item => {
         files.push(
             {
                 file_name: item,
-                file_path: env.DOMAIN + "/f/" + item
+                file_path: http_s + IPv4 + ':' + p + "/f/" + item
             });
     });
 
@@ -49,11 +66,13 @@ router.post('/api/upload/', upload.array('package'), (req, res) => {
     if (req.files.length == 0) { res.status(200).redirect('/'); return; } // No files have been uploaded
     if (!req.session.uploaded_files) req.session.uploaded_files = [];
 
+    const p = get_port(), http_s = get_http_or_https();
+
     req.files.forEach(item => {
         req.session.uploaded_files.push(
             {
                 file_name: item.filename,
-                file_path: env.DOMAIN + "/f/" + item.filename,
+                file_path: http_s + IPv4 + ':' + p + "/f/" + item.filename,
                 original_name: item.originalname
             });
     });

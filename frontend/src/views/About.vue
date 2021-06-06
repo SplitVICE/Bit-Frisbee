@@ -9,21 +9,21 @@
 
         <div class="col-12 col-sm-12 col-md-5 col-lg-6">
           <img
-            class="just-vice-logo"
+            class="split-vice-logo"
             src="../assets/jv-icon.png"
-            alt="JUST VICE logo"
+            alt="SPLIT VICE logo"
           />
         </div>
       </div>
     </div>
 
-    <div class="text">Application made by JUST VICE</div>
+    <div class="text">Application made by SPLIT VICE</div>
 
     <div class="links">
-      <a href="http://just-vice.com" target="_blank">VICE's website</a>
+      <a href="https://split-vice.com" target="_blank">VICE's website</a>
       <br />
       <a
-        href="http://just-vice.com/technology/web-software/bit-frisbee/"
+        href="https://split-vice.com/technology/web-software/bit-frisbee/"
         target="_blank"
         >Bit Frisbee official website</a
       >
@@ -31,7 +31,7 @@
 
     <div class="mt-5"></div>
     © MIT |
-    <a href="https://github.com/JUSTVICE/Bit-Frisbee" target="_blank">Github</a>
+    <a href="https://github.com/SplitVICE/Bit-Frisbee" target="_blank">Github</a>
     | {{ application_version }}
   </div>
 </template>
@@ -50,7 +50,7 @@ a {
   color: rgb(80, 49, 223);
   font-weight: 700;
 }
-.just-vice-logo {
+.split-vice-logo {
   width: 140px;
 }
 .margin-top {
