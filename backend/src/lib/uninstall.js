@@ -3,7 +3,7 @@ var Service = require('node-windows').Service;
 
 // Create a new service object
 var svc = new Service({
-    name: 'Bit Frisbee by JUST VICE',
+    name: 'Bit Frisbee by SPLIT VICE',
     script: require('path').join(__dirname, '../index.js')
 });
 
