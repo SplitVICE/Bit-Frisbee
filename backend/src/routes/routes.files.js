@@ -25,6 +25,7 @@ const upload = multer({ storage: storage });
 
 let IPv4 = undefined;
 (async () => { IPv4 = await localIpV4Address() })()
+const CUSTOM_DOMAIN = (() => { if (env.DOMAIN.toLowerCase() == 'ipv4') return false; else return env.DOMAIN; })()
 
 // ========================================================================================
 // HELPER FUNCTIONS
@@ -54,7 +55,11 @@ router.get('/api/files/', async (req, res) => {
         files.push(
             {
                 file_name: item,
-                file_path: http_s + IPv4 + ':' + p + "/f/" + item
+                file_path: (() => {
+                    if (!CUSTOM_DOMAIN)
+                        return http_s + IPv4 + ':' + p + "/f/" + item;
+                    else return http_s + CUSTOM_DOMAIN + "/f/" + item;
+                })()
             });
     });
 
@@ -72,7 +77,11 @@ router.post('/api/upload/', upload.array('package'), (req, res) => {
         req.session.uploaded_files.push(
             {
                 file_name: item.filename,
-                file_path: http_s + IPv4 + ':' + p + "/f/" + item.filename,
+                file_path: (() => {
+                    if (!CUSTOM_DOMAIN)
+                        return http_s + IPv4 + ':' + p + "/f/" + item.filename;
+                    else return http_s + CUSTOM_DOMAIN + "/f/" + item.filename;
+                })(),
                 original_name: item.originalname
             });
     });

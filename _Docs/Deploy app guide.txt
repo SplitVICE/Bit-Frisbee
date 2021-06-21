@@ -4,23 +4,42 @@ PORT= example:4000 . Recommended port is 4000 FOR development.
 EXPRESS_SESSION_SECRET= a strong session key
 SHOW_FILES_STORED= receives a boolean. true/false . Will show all files stored on server.
 USE_HTTPS= receives a boolean true/false . To set if HTTPS is being used.
+DOMAIN= set as "IPV4" to use IPv4 localhost domain. Set anything else to use custom domain.
 
-Complete example of .env file:
+Complete example of .env file (with IPv4):
 
 PORT=4000
 EXPRESS_SESSION_SECRET=l!AHGSwyUa2mL#tKuyE8jC&1XVlHFJR9%LdKQT*gwdsO3110EM
 SHOW_FILES_STORED=true
 USE_HTTPS=false
+DOMAIN=IPV4
+
+Complete example of .env file (with custom domain).
+Notes:
+Custom domain should not end with a "/"
+Custom domain should not include http:// or https:// at the beginning. It must be set at USE_HTTPS variable.
+When using custom domain, the variable PORT will be ignored.
+
+PORT=
+EXPRESS_SESSION_SECRET=l!AHGSwyUa2mL#tKuyE8jC&1XVlHFJR9%LdKQT*gwdsO3110EM
+SHOW_FILES_STORED=true
+USE_HTTPS=true
+DOMAIN=32af02151ce2.ngrok.io
 
 Install backend's modules with: "npm install"
 To run application run this command being at backend's folder: npm run dev
 
 This application only needs backend project running to work. frontend project is just a project that was
-used to build a Vue frontend that is being used at /backend/src/public/spa
+used to build a Vue frontend that is being used at /backend/src/public/spa and /backend/src/public/index.html
+
+================================================================================================================
 
 --- To run frontend application only:
 
-To run frontend application:
+Frontend application can be found at /backend/public/index.html and /backend/src/public/spa
+To edit this frontend, go to /frontend/
+
+To run frontend separated application:
 Install frontend's modules with: "npm install"
 Run this command being at frontend's folder to run application: npm run serve
 

@@ -22,8 +22,8 @@ Uploaded files will be stored at `/backend/src/public/f/`
 # Web application setup
 
 - Download application from repository.
-- Go to `/backend/` and create `.env` file. Use `/backend/.env.template` to fill `.env` file with customized settings. Go to `/_Docs/Deploy app.txt` to read a detailed guide to deploy the application.
-- For a quick application deployment, run `Start server.bat` file.
+- Go to `/backend/` and create `.env` file. Use `/backend/.env.template` to fill `.env` file with customized settings. Go to `/_Docs/Deploy app guide.txt` to read a detailed guide to set settings and deploy application.
+- Once changes inside `/_Docs/Deploy app guide.txt` made: for a quick application deployment, run `Start server.bat` file.
 - For manual application deployment: open a terminal at backend folder - run `npm install` command to install required modules and dependencies - when finished, run `npm run dev` command to start application server.
 
 # Installing application
@@ -33,6 +33,8 @@ Bit Frisbee can be installed on PCs with Windows operating system by running the
 This is made by using node-windows module.
 
 To uninstall application `Uninstall Bit Frisbee.bat` should do the job.
+
+Note: you must set settings of application as explained inside `/_Docs/Deploy app guide.txt` before installing the application.
 
 ### Support?
 <a target="_blank" href="https://split-vice.com/send-message">Contact me</a>
