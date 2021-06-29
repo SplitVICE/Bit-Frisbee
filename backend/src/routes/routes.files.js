@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
 
 let IPv4 = undefined;
 (async () => { IPv4 = await localIpV4Address() })()
-const CUSTOM_DOMAIN = (() => { if (env.DOMAIN.toLowerCase() == 'ipv4') return false; else return env.DOMAIN; })()
+const CUSTOM_DOMAIN = (() => { return env.DOMAIN.toLowerCase() == 'ipv4' ? false : env.DOMAIN })()
 
 // ========================================================================================
 // HELPER FUNCTIONS
@@ -87,6 +87,26 @@ router.post('/api/upload/', upload.array('package'), (req, res) => {
     });
 
     res.status(200).redirect('/'); return;
+});
+
+// Route to upload files onto server file system
+router.post('/api/upload-external/', upload.array('files'), (req, res) => {
+    if (req.files === undefined) { res.status(200).json({ status: 'warning', description: 'no files provided' }); return; }
+    if (req.files.length == 0) { res.status(200).json({ status: 'warning', description: 'no files provided' }); return; }
+
+    const p = get_port(), http_s = get_http_or_https();
+
+    const FILES = []; req.files.forEach(e => {
+        FILES.push({
+            file_name: express.filename,
+            file_path: (() => {
+                if (!CUSTOM_DOMAIN) return http_s + IPv4 + ':' + p + "/f/" + e.filename;
+                else return http_s + CUSTOM_DOMAIN + "/f/" + e.filename;
+            })(),
+            original_name: e.originalname
+        })
+    });
+    res.status(200).json({ status: 'success', description: 'files uploaded', files: FILES });
 });
 
 // Returns the list of files uploaded by the user in the current session
