@@ -5,7 +5,7 @@ var Service = require('node-windows').Service;
 var svc = new Service({
   name:'Bit Frisbee by SPLIT VICE',
   description: 'Bit Frisbee auto start by node-windows.',
-  script: require("path").join(__dirname, "../index.js"),
+  script: require('path').join(__dirname, '../index.js'),
   nodeOptions: [
     '--harmony',
     '--max_old_space_size=4096'

@@ -57,7 +57,7 @@
             const formData = new FormData();
             files.forEach(file => { formData.append("files", file); });
 
-            // Server files sending
+            // Files are send to server
             const res = await axios.post(API_HOST, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
             console.log(res.data);
             document.getElementById('result').innerHTML = /* html */`

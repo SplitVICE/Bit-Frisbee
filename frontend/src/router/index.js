@@ -20,6 +20,11 @@ const routes = [
     component: () => import('../views/Files.vue')
   },
   {
+    path: '/api',
+    name: 'Api',
+    component: () => import('../views/Api.vue')
+  },
+  {
     path: '/*',
     name: '404',
     component: () => import('../views/404.vue')

@@ -2,13 +2,13 @@
   <div>
     <div v-if="file_list == `files readability disabled`">
       <div class="alert alert-warning" role="alert">
-        File visibility disabled
+        Files visibility disabled
       </div>
     </div>
 
     <div v-else-if="file_list.length == 0">
       <div class="alert alert-warning" role="alert">
-        There are no files stored
+        No files stored
       </div>
     </div>
 

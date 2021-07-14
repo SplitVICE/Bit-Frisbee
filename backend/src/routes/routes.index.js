@@ -1,6 +1,6 @@
-const express = require("express"),
-    router = express.Router(),
-    path = require('path');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
 
 // Returns a status to check if server is up
 router.get('/api/ping', (req, res) => { res.json({ status: 'up', description: 'server is up and running' }); });

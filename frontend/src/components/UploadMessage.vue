@@ -34,27 +34,22 @@ export default {
     host_uploaded_files: String,
   },
   async mounted() {
-    // runs when component has been mounted
-    // Toggle to change behavior
-    if (true) {
-      // Normal behavior
-      const request = await fetch(this.$props.host_uploaded_files),
-        response = await request.json();
-      if (
-        response.status == "warning" &&
-        response.description == "no files have been uploaded"
-      )
-        return;
+    const dev_example_view = false;
 
-      this.files = response.uploaded_files.reverse();
-      this.$emit("right_container_settings", "", false);
+    if (!dev_example_view) {
+      const files = JSON.parse(localStorage.getItem("uploads"));
+      if (files == null) return;
+
+      this.files = files.reverse();
     } else {
-      // Show this component on home screen for dev purposes
+      // Shows this component on home screen for dev purposes
       this.files = [
         {
           file_name: "21JzXoHAET4u_valheim_qwpJNUpF2k.png",
-          file_path: "http://localhost:4000/f/cvwwwne5cko6t9ilt-asjdnashdbasdhasvbdasvhdgvashdvashgd.png",
-          original_name: "Colkinab0ko6t8inki-asdbashbdqbdqvqwdjqwjhdbqhwd jhqwbd qwhdbjhqwbasdasd.png",
+          file_path:
+            "http://localhost:4000/f/cvwwwne5cko6t9ilt-asjdnashdbasdhasvbdasvhdgvashdvashgd.png",
+          original_name:
+            "Colkinab0ko6t8inki-asdbashbdqbdqvqwdjqwjhdbqhwd jhqwbd qwhdbjhqwbasdasd.png",
         },
       ];
       this.$emit("right_container_settings");
@@ -80,7 +75,7 @@ export default {
   text-align: center;
   font-size: 20px;
 }
-.file-link a{
+.file-link a {
   overflow: hidden;
 }
 /* SCREEN RESPONSIVE */

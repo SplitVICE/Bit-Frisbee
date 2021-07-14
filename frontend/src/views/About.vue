@@ -29,9 +29,19 @@
       >
     </div>
 
+    <div class="mt-4">
+      <a class='mt-3' href="/api">API</a>
+      <br>
+      <a @click="delete_uploads_history" href="javascript:void(0)"
+        >Delete my uploads history</a
+      >
+    </div>
+
     <div class="mt-5"></div>
     © MIT |
-    <a href="https://github.com/SplitVICE/Bit-Frisbee" target="_blank">Github</a>
+    <a href="https://github.com/SplitVICE/Bit-Frisbee" target="_blank"
+      >Github</a
+    >
     | {{ application_version }}
   </div>
 </template>
@@ -72,6 +82,12 @@ export default {
   },
   computed: {
     ...mapState(["application_version"]),
+  },
+  methods: {
+    delete_uploads_history() {
+      localStorage.clear("uploads");
+      alert('Uploads history deleted!');
+    },
   },
 };
 </script>

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Source and guide: https://www.npmjs.com/package/node-windows
 var Service = require('node-windows').Service;
 

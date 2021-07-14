@@ -1,0 +1,17 @@
+=== INTRO ===
+
+In developer mode both frontend and backend applications run to create the one single Bit Frisbee platform service.
+
+Before reading this guide, read /_Docs/Guides/Setup app.txt and follow steps to learn the bases to run this application.
+
+================================================================================================================
+
+=== BACKEND ===
+
+The port should be set at 4000. Frontend consumes backend's API looking for it at port 4000 on same local machine network.
+
+=== FRONTEND ===
+
+Go to /frontend/src/store/index.js -> change variable "dev_mode" into "true".
+By default this variable is set to true. When the frontend is commanded to make a build onto backend, "dev_mode" variable's
+value must be "false".

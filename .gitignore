@@ -1,6 +1,10 @@
 /node_modules
 /backend/src/public/f
 /backend/src/test.js
+/backend/test.js
+/TODO.TXT
+/backend/src/public/index.html
+/backend/src/public/spa/
 
 # dotenv environment variables file
 .env
