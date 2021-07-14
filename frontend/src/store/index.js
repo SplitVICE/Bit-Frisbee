@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const dev_mode = true;
+const dev_mode = false;
 
 export default new Vuex.Store({
   state: {

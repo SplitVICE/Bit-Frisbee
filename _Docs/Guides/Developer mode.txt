@@ -13,5 +13,4 @@ The port should be set at 4000. Frontend consumes backend's API looking for it a
 === FRONTEND ===
 
 Go to /frontend/src/store/index.js -> change variable "dev_mode" into "true".
-By default this variable is set to true. When the frontend is commanded to make a build onto backend, "dev_mode" variable's
-value must be "false".
+When the frontend is commanded to make a build onto backend, "dev_mode" variable's value must be "false".

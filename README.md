@@ -24,7 +24,7 @@ Bit Frisbee works with <a target="_blank" href="https://ngrok.com/">Ngrok</a>.
 # Web application setup
 - Download application from repository.
 - Quick start: run `Build frontend.bat` and then `Start server.bat`.
-- Manual start: run `npm install` on terminal while being at `/frontend` folder and then `npm run build` on terminal while being at `/frontend` folder. Then run `npm install` and `npm start` or `npm run dev` on terminal while being at `/backend` folder.
+- Manual start: run `npm install` on terminal while being at `/frontend` folder and then `npm run build` on terminal while being at `/frontend` folder. Then run `npm install`, `npm start` or `npm run dev` on terminal while being at `/backend` folder.
 
 ### Detailed setup and environment variables
 Check the setup guide file at `/_Docs/Guides/Setup app.txt` for specific details of app deployment, environment variables, and developer mode.

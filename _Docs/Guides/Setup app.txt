@@ -20,7 +20,7 @@ Go to project root and run "Build frontend.bat" and then "Start server.bat" file
 Run "npm install" on terminal while being at /frontend folder.
 Run "npm run build" on terminal while being at /frontend folder.
 Run "npm install" on terminal while being at /backend folder.
-Run application with "npm run dev" or "npm start while being at /backend folder.
+Run application with "npm run dev" or "npm start" while being at /backend folder.
 
 ================================================================================================================
 
@@ -29,10 +29,10 @@ Run application with "npm run dev" or "npm start while being at /backend folder.
 Change /backend/.env.template file's name to /backend/.env or create /backend/.env file and fill required parameters:
 
 PORT=. Example:4000 . Recommended port is 4000 FOR development. If not stated, port will be 4000.
-SHOW_FILES_STORED=. Receives boolean. true/false . Will show all files stored on server at /files web route.
-USE_HTTPS=. Receives boolean. true/false . To set HTTPS to be used. true=https. false=http.
+SHOW_FILES_STORED=. Receives boolean. true/false . Will show all files stored on server at /files web route. Default: true.
+USE_HTTPS=. Receives boolean. true/false . To set HTTPS to be used. true=https. false=http. Default: false.
 DOMAIN=. set "ipv4" to use IPv4 localhost domain. Anything else to set custom domain. The value set at this variable
-is used to build uploaded file paths.
+is used to build uploaded file paths. Default: ipv4.
 
 Example (with IPv4):
 
@@ -63,6 +63,7 @@ Run application with "npm run serve".
 === BUILD CHANGES ON BACKEND ===
 
 Go to /backend/src/public/ and delete "index.html" file and "spa" directory.
+Go to /frontend/src/store/index.js -> change variable "dev_mode" into "false".
 Run "npm run build" on terminal while being at /frontend folder.
 
 ================================================================================================================
