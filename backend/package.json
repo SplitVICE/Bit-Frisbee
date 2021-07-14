@@ -10,13 +10,13 @@
     "lint-fix": "eslint ./src/ --fix"
   },
   "keywords": [
-    "JUST VICE",
+    "SPLIT VICE",
     "NODEJS",
     "VUE",
     "MULTER",
     "BIT FRISBEE"
   ],
-  "author": "JUST VICE",
+  "author": "SPLIT VICE",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
