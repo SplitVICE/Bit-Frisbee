@@ -21,6 +21,8 @@ Uploaded files will be stored at `/backend/src/public/f/`
 
 Bit Frisbee works with <a target="_blank" href="https://ngrok.com/">Ngrok</a>.
 
+API to upload files from external sources implemented.
+
 # Web application setup
 - Download application from repository.
 - Quick start: run `Build frontend.bat` and then `Start server.bat`.
