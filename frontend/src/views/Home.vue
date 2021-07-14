@@ -176,7 +176,6 @@ export default {
         let uploads = [];
 
         if (localStorage.getItem("uploads") != null) {
-          console.log("array");
           uploads = JSON.parse(localStorage.getItem("uploads"));
         }
 
@@ -184,11 +183,7 @@ export default {
           uploads.push(e);
         });
 
-        console.log(uploads);
-
         localStorage.setItem("uploads", JSON.stringify(uploads));
-
-        console.log(JSON.parse(localStorage.getItem("uploads")));
       }
     },
   },
