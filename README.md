@@ -41,5 +41,7 @@ To uninstall application tun `Install/Uninstall Bit Frisbee.bat`.
 
 Note: installation will be done on the Bit Frisbee instance you run the script so make sure you installed dependencies and set environment variables.
 
+### Create a build executable
+To create an executable build file run the file called `/Create build.bat`. This will delete all unnecessary, frontend project and will move `/backend/` files onto root folder. A file called `Start.bat` will remain on project root to quickly start the application
 ### Support?
 <a target="_blank" href="https://split-vice.com/send-message">Contact me</a>

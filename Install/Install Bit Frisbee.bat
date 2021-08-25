@@ -7,6 +7,6 @@ echo If installation fails, stop application and remove /backend/node_modules/ a
 echo -----------------------------------
 SET /P x="Press any key to continue or close this window to cancel."
 echo Bit Frisbee by SPLIT VICE
-cd .. && npm install -g node-windows && cd ./backend/ && npm i && npm link node-windows && node ./src/lib/install.js
+cd .. && npm install -g node-windows && cd ./frontend/ && npm i && npm run build && cd .. && cd ./backend/ && npm i && npm link node-windows && node ./src/lib/install.js
 @echo off
 SET /P a="Script completed. Press any key to close."
