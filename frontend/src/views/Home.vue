@@ -5,31 +5,28 @@
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
           <div class="left-container">
-            <BitFrisbeePrincipalLogo subtitle="File storage" />
-            <!-- SELECT FILES BUTTON -->
+            <BitFrisbeePrincipalLogo />
             <button
               class="btn btn-primary button-select-files"
               @click="select_files()"
             >
               Select files
             </button>
-
-            <!-- SELECT FILES BUTTON -->
             <input
               id="input-select-files"
               @change="input_select_files_onChange()"
               class="input-select-files"
               type="file"
-              name="package"
+              name="files"
               multiple
             />
             <!-- REACTIVE TEXT THAT CHANGES WHEN FILES ARE SELECTED -->
             <div class="selected-files-container">
-              <div v-if="file_amouth > 0">
-                <span v-if="file_amouth == 1">
-                  {{ file_amouth }} selected file
+              <div v-if="file_amount > 0">
+                <span v-if="file_amount == 1">
+                  {{ file_amount }} selected file
                 </span>
-                <span v-else>{{ file_amouth }} selected files</span>
+                <span v-else>{{ file_amount }} selected files</span>
               </div>
               <div v-else>No selected files</div>
             </div>
@@ -45,17 +42,21 @@
           </div>
         </div>
         <!-- ////////////////////////////////////////// -->
-        <!-- RIHGT CONTAINER -->
+        <!-- RIGHT CONTAINER -->
+        <!-- ////////////////////////////////////////// -->
+        <!-- Normal home screen -->
         <!-- ////////////////////////////////////////// -->
         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
           <div class="right-container" id="right_container">
             <div :class="right_message__host_files_show_hide">
+              <br /><br /><br /><br />
               <span class="right-container-title"> Host files for free </span>
               <span class="right-container-subtitle">
                 File size limit: unlimited
               </span>
             </div>
-
+            <!-- Uploading files notice screen -->
+            <!-- ////////////////////////////////////////// -->
             <div :class="right_message__uploading_files_show_hide">
               <span class="right-container-title"> Uploading files... </span>
               <span class="right-container-subtitle">
@@ -71,11 +72,11 @@
                 0%
               </div>
             </div>
+            <!-- Uploaded files list -->
+            <!-- ////////////////////////////////////////// -->
             <span v-if="show_uploaded_files_list == true">
-              <UploadMessage
-                :host_uploaded_files="serverHost.api_uploaded_files_retrieve"
-                :class="right_message__uploaded_files_show_hide"
-              />
+              <div class="title">Uploaded files</div>
+              <UploadedFiles />
             </span>
           </div>
         </div>
@@ -86,26 +87,30 @@
 
 <script>
 import { mapState } from "vuex";
-import UploadMessage from "@/components/UploadMessage.vue";
-import BitFrisbeePrincipalLogo from "../components/BitFrisbeePrincipalLogo.vue";
+import UploadedFiles from "@/components/UploadedFiles";
+import UploadedElement from "@/components/UploadedElement";
+import BitFrisbeePrincipalLogo from "../components/BitFrisbeePrincipalLogo";
+import Modal from "../components/Modal";
 import axios from "axios";
 export default {
   data: () => {
     return {
-      file_amouth: 0,
-      files: undefined, // Selected files container
-      show_uploading_message: false,
-      show_uploaded_files_list: false,
+      file_amount: 0, // Used to show how many files are selected.
+      files: undefined, // Selected files container.
+      show_uploading_message: false, // Shows an uploading message and progress bar.
+      show_uploaded_files_list: false, // If there are uploaded files, the list of these will be displayed if true.
     };
   },
   components: {
-    UploadMessage,
+    UploadedFiles,
+    UploadedElement,
     BitFrisbeePrincipalLogo,
+    Modal,
   },
   computed: {
     ...mapState(["serverHost"]),
     upload_button_toggle_enable() {
-      return this.file_amouth > 0 ? false : true;
+      return this.file_amount > 0 ? false : true;
     },
     right_message__host_files_show_hide() {
       if (this.show_uploaded_files_list == true) {
@@ -119,21 +124,19 @@ export default {
       }
       return this.show_uploading_message == true ? "" : "invisible";
     },
-    right_message__uploaded_files_show_hide() {
-      return this.show_uploaded_files_list == true ? "" : "invisible";
-    },
   },
   methods: {
-    // Opens a file system window to select the files to upload
+    // Opens a file system window to select the files to upload.
     select_files() {
       document.getElementById("input-select-files").click();
     },
+    // Event On Change when files have been selected.
     input_select_files_onChange() {
       // DOM element of selected files button
       const files_element = document.getElementById("input-select-files");
-      this.file_amouth = files_element.files.length;
+      this.file_amount = files_element.files.length;
 
-      // Files are stored inside an array with all file information
+      // Files are stored inside this.files data variable.
       this.files = (() => {
         const _ = [];
         for (let i = 0; i < files_element.files.length; i++) {
@@ -142,13 +145,14 @@ export default {
         return _;
       })();
     },
+    // Uploads the files to the server side.
     async upload_files() {
       this.show_uploaded_files_list = false;
       this.show_uploading_message = true;
 
       const formData = new FormData();
       this.files.forEach((file) => {
-        formData.append("package", file);
+        formData.append("files", file);
       });
 
       const progress_bar = document.getElementById("progress_bar");
@@ -188,7 +192,10 @@ export default {
     },
   },
   mounted() {
-    if (localStorage.getItem("uploads") != null && JSON.parse(localStorage.getItem("uploads")).length > 0)
+    if (
+      localStorage.getItem("uploads") != null &&
+      JSON.parse(localStorage.getItem("uploads")).length > 0
+    )
       this.show_uploaded_files_list = true;
   },
 };
@@ -256,7 +263,6 @@ export default {
 }
 .right-container {
   width: 100%;
-  margin-top: 100px;
 }
 .right-container-title {
   display: flex;
@@ -268,6 +274,15 @@ export default {
   justify-content: center;
   font-weight: 600;
   margin: auto;
+}
+.title {
+  text-align: center;
+  font-size: 60px;
+}
+@media only screen and (max-width: 426px) {
+  .title {
+    font-size: calc(100% + 3.2vw);
+  }
 }
 /* SCREEN SIZE RESPONSIVENESS */
 @media only screen and (max-width: 1399px) {

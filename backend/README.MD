@@ -1,8 +1,8 @@
 ### Install all modules:
 `npm install`
 
-### To run application:
+### To run dev mode:
 `npm run dev`
 
-### Automatically install modules and start server:
-Run the file called: `Start server.bat`.
+### To run application:
+`npm start`

@@ -1,8 +1,0 @@
-API to upload files from external source
-|------ POST
-/api/upload-external/
-HTTP request form - multipart/form-data - POST
-|--- Responses - 2
-{ status: 'warning', description: 'no files provided' }
-{ status: 'success', description: 'files uploaded', files: <Uploaded files data here> }
-Check /backend/src/public/test-room/api-upload-external.html to see an utilization example.

@@ -1,38 +1,15 @@
 <template>
   <div class="this container mt-5">
     <div class="h1">API</div>
-    Bit Frisbee currently counts with 1 developers API to consume.
+    Bit Frisbee counts with 1 public API.
     <hr />
     <div class="h3">API to upload files</div>
     API location: <b>/api/upload-external/</b>
     <br />
     Requires:<br />
-    <b>POST - multipart/form-data request type - files=(file data here)</b
-    ><br />
-    See Postman example below to see API response to successful file upload.
-    <div class="h5">Axios example:</div>
-    <div class="code-style">
-      <pre>
-        let files = undefined;
-        input_files.addEventListener('change', e => {
-            files = (() => {
-                const _ = []
-                for (let i = 0; i &lt; e.target.files.length; i++) {
-                    _.push(e.target.files[i]);
-                }
-                return _
-            })()
-        })
-
-        const formData = new FormData();
-        files.forEach(file => { formData.append("files", file); });
-
-        const res = await axios.post('/api/upload-external/', formData,
-          { headers: { 'Content-Type': 'multipart/form-data' } });
-      </pre>
-    </div>
-    <div class="h5">Working Postman example:</div>
-    <img src="../assets/postman-demo.png" alt="postman api demo" />
+    <b>POST - multipart/form-data request type - files=(file data here)</b>
+    <br>
+    <a href="https://github.com/SplitVICE/Bit-Frisbee/blob/master/backend/src/public/test-room/api-upload-external.html" target="_blank">Example usage</a>
   </div>
 </template>
 

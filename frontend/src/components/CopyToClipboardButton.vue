@@ -1,18 +1,19 @@
 <template>
-  <button class="btn" v-on:click="copy_text_to_clipboard(to_clipboard)">
+  <div class="btn" v-on:click="copy_text_to_clipboard(ToClipboard)">
     {{ button_text }}
-  </button>
+  </div>
 </template>
 
 <script>
 export default {
   data: () => {
     return {
-      button_text: "Copy link"
+      button_text: "Copy link",
     };
   },
   props: {
-    to_clipboard: String,
+    ToClipboard: String,
+    ButtonText: String,
   },
   methods: {
     copy_text_to_clipboard(text_to_copy) {
@@ -24,9 +25,16 @@ export default {
       document.body.removeChild(dummy);
       this.button_text = "Copied!";
       setTimeout(() => {
-        this.button_text = "Copy link";
-      }, 2000);
+        this.SetButtonText();
+      }, 1000);
     },
+    SetButtonText() {
+      if (this.ButtonText == "") return;
+      this.button_text = this.ButtonText;
+    },
+  },
+  mounted() {
+    this.SetButtonText();
   },
 };
 </script>
@@ -36,9 +44,10 @@ export default {
   background-color: black;
   color: white;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 5px;
+  word-wrap: break-word;
 }
-.btn:hover{
-  background-color: rgb(46, 46, 46);
+.btn:hover {
+  background-color: rgb(90, 41, 0);
 }
 </style>

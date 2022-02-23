@@ -5,6 +5,9 @@
 /TODO.TXT
 /backend/src/public/index.html
 /backend/src/public/spa/
+/backend/files/
+/temp/
+/build/
 
 # dotenv environment variables file
 .env

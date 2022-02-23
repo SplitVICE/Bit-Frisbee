@@ -2,11 +2,10 @@
   <div class="this container">
     <div class="margin-general"></div>
     <div class="row">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-5">
         <BitFrisbeePrincipalLogo />
       </div>
-      <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-        <div class="margin-files"></div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-7">
         <div class="title-files-stored">Files stored</div>
         <FileList :api_host="serverHost.api_files" />
       </div>
@@ -35,9 +34,6 @@ export default {
 }
 .margin-general{
   margin-top: 60px;
-}
-.margin-files{
-  margin-top: 50px;
 }
 .title-files-stored{
   font-size: 80px;

@@ -7,41 +7,115 @@
 
 A simple file hosting server. <a href="http://split-vice.com/technology/web-software/bit-frisbee/" target="_blank">Official website</a>
 
-<img src="./_Docs/Images/bit-frisbee-demo.png"/>
+<img src="https://dl.dropboxusercontent.com/s/1xahmwuxvwcc321/bit-frisbee-demo.png"/>
 
 # Technical specs
 
-Developed in Node v12.16.2. Bit Frisbee needs Node to be installed on the PC to be executed.
+Developed in NodeJS v12.16.2.
 
-[Node official website](https://nodejs.org/en/)
+Uploaded files will be stored at `/files/`.
 
-Bit Frisbee uses VueJS frontend which has been developed in a separated project. To run the application it is only needed to run the backend project. No database needed.
+| Backend          | Frontend        | Database     |
+| ---------------- | --------------- | ------------ |
+| NodeJS + Express | VueJS (Vue CLI) | No database. |
 
-Uploaded files will be stored at `/backend/src/public/f/`
+# Environment variables
 
-Bit Frisbee works with <a target="_blank" href="https://ngrok.com/">Ngrok</a>.
+Environment variables is the only way to configure the application.
 
-API to upload files from external sources implemented.
+## PORT
 
-# Web application setup
-- Download application from repository.
-- Quick start: run `Build frontend.bat` and then `Start server.bat`.
-- Manual start: run `npm install` on terminal while being at `/frontend` folder and then `npm run build` on terminal while being at `/frontend` folder. Then run `npm install`, `npm start` or `npm run dev` on terminal while being at `/backend` folder.
+ Location: /backend/.env
 
-### Detailed setup and environment variables
-Check the setup guide file at `/_Docs/Guides/Setup app.txt` for specific details of app deployment, environment variables, and developer mode.
+ Description: port where application can be accessed.
 
-# Installing application
+ Default: 4000.
 
-Bit Frisbee can be installed on PCs with Windows operating system by running the file called `Install/Install Bit Frisbee.bat`. The application will start automatically on Windows startup and run on the background.
+ Expected value: Number.
 
-This is made by using <a target="_blank" href="https://www.npmjs.com/package/node-windows">node-windows</a> module.
+## SHOW_FILES_STORED
 
-To uninstall application tun `Install/Uninstall Bit Frisbee.bat`.
+Location: /backend/.env
 
-Note: installation will be done on the Bit Frisbee instance you run the script so make sure you installed dependencies and set environment variables.
+Description: Whether to show all stored files in the Files section or hide them.
 
-### Create a build executable
-To create an executable build file run the file called `/Create build.bat`. This will delete all unnecessary, frontend project and will move `/backend/` files onto root folder. A file called `Start.bat` will remain on project root to quickly start the application
-### Support?
-<a target="_blank" href="https://split-vice.com/send-message">Contact me</a>
+Default: false.
+
+Expected value: Boolean.
+
+## USE_HTTPS
+
+ Location: /backend/.env
+
+ Description: If generated URLs show have `http://` or `https://` at the beginning.
+
+ Default: false.
+
+ Expected value: Boolean.
+
+ ## DOMAIN
+
+ Location: /backend/.env
+
+ Description: If the application is running with a custom domain, it is required to write it in this variable.
+
+ Take special note that in the domain variable the value must not have `http://`, `https://`, nor final dash `/`.
+
+ Default: If not set, IPv4 URL is generated using `local-ipv4-address` module.
+
+ Expected value: String.
+
+  Value example:
+
+ ```
+ DOMAIN=bit-frisbee.com
+ ```
+
+ ## VUE_APP_DEV_MODE
+
+ Location: /frontend/.env
+
+ Description: this variable must have value `true` if source code is being edited.
+
+ Default: false.
+
+ Expected value: Boolean.
+
+# Build application
+
+- Make sure  `/frontend/.env -> VUE_APP_DEV_MODE == false`.
+- Configure `/backend/.env -> DOMAIN, USE_HTTPS, SHOW_FILES_STORED, & PORT` environment variables. They can be configured later in `/build/.env`.
+- Both backend and frontend modules must be installed.
+- Run `/build.py`. Builded application will be inside `/build/`.
+- Note: UNIX commands are used to create the build application.
+
+# Development mode
+
+To properly modify source code and have hot reload, follow these steps:
+
+- Make sure backend's port is configured to 4000. If you need a different port, change `/frontend/src/store/index.js -> _backendPort`.
+- Make sure `/frontend/.env -> VUE_APP_DEV_MODE == true`.
+- Run backend `npm run dev`.
+- Run frontend `npm run serve`.
+
+# Ngrok service
+
+Application works with Ngrok service. The Ngrok URL must be set in `.env` as the following example:
+```
+USE_HTTP=true
+DOMAIN=32af02151ce2.ngrok.io
+```
+
+# Install as a service - Windows
+
+Bit Frisbee can be installed and run as a service on Windows using the module node-windows
+
+https://www.npmjs.com/package/node-windows
+
+Premade scripts are contained in `/backend/src/lib/node-windows/`
+
+# Support
+
+Send me a message.
+
+https://split-vice.com/send-message

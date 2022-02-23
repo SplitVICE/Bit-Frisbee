@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link>
       <router-link to="/files">Files</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link to="/more">More</router-link>
     </div>
     <router-view/>
   </div>
@@ -51,5 +51,24 @@ body{
     font-size: 18px;
     margin: 0px 0px 15px 0px;
   }
+}
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(255, 110, 14);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(255, 110, 14);
 }
 </style>

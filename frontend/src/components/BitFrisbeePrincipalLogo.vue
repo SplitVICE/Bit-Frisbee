@@ -1,10 +1,8 @@
 <template>
   <div class="this">
     <div class="h1">
-      <a href="/" class="hook">
         <img src="../assets/logo.png" class="logo" alt="bit frisbee logo" />
         <span class="title">Bit Frisbee</span>
-      </a>
     </div>
   </div>
 </template>
@@ -25,6 +23,7 @@ export default {
   margin-left: 10px;
   color: #ff3700;
   font-size: 50px;
+  user-select: none;
 }
 .hook {
   text-decoration: none;

@@ -30,9 +30,9 @@
     </div>
 
     <div class="mt-4">
-      <a class='mt-3' href="/api">API</a>
-      <br>
-      <a @click="delete_uploads_history" href="javascript:void(0)"
+      <a class="mt-3" href="/api">API</a>
+      <br />
+      <a @click="ToggleShowModal" href="javascript:void(0)"
         >Delete my uploads history</a
       >
     </div>
@@ -43,6 +43,16 @@
       >Github</a
     >
     | {{ application_version }}
+    <span v-if="show_modal == true">
+    <Modal
+      Content="<div class='h1'>Delete uploads history</div>This action cannot be undone. Are you sure?"
+      ButtonOne="Delete history"
+      ButtonTwo="Cancel"
+      @ButtonOneClick="delete_uploads_history"
+      @ButtonTwoClick="ToggleShowModal"
+      @ToggleInvisible="ToggleShowModal"
+    />
+    </span>
   </div>
 </template>
 
@@ -76,17 +86,27 @@ a {
 <script>
 import { mapState } from "vuex";
 import BitFrisbeePrincipalLogo from "../components/BitFrisbeePrincipalLogo";
+import Modal from "../components/Modal.vue";
 export default {
+  data() {
+    return {
+      show_modal: false
+    }
+  },
   components: {
     BitFrisbeePrincipalLogo,
+    Modal,
   },
   computed: {
     ...mapState(["application_version"]),
   },
   methods: {
+    ToggleShowModal(){
+      this.show_modal = !this.show_modal;
+    },
     delete_uploads_history() {
       localStorage.clear("uploads");
-      alert('Uploads history deleted!');
+      this.show_modal = false;
     },
   },
 };
