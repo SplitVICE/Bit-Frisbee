@@ -7,19 +7,21 @@ if (os.path.exists("build") == True):
     os.system("rm -rvf build")
 
 commands = [
+    "mkdir build",
     "cd frontend && npm run build",
-    "cp -r 'backend' 'build'",
-    "rm build/.env.template",
-    "rm build/README.MD",
-    "rm build/.eslintrc.json",
-    "rm build/files/*",
+    "cp 'backend/package.json' 'build/package.json",
+    "cp 'backend/package-lock.json' 'build/package-lock.json",
+    "cp 'backend/.env' 'build/.env",
+    "cp -r 'backend/src' 'build/src",
     "rm -rvf build/src/lib/node-windows/",
     "rm -rvf build/src/public/test-room/",
-    "rm -rvf build/src/test/"
+    "rm -rvf build/src/test/",
+    "cd build && npm install --production",
+    "rm -rvf backend/src/public/spa",
+    "rm -rvf backend/src/public/index.html",
+    "rm -rvf backend/src/public/external/",
+    "rm -rvf backend/src/public/favicon.ico",
 ]
 
 for c in commands:
     os.system(c)
-
-if (os.path.exists("build/node_modules/") == False):
-    os.system("cd build && npm i")
