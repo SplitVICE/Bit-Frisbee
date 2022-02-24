@@ -27,10 +27,6 @@ export default {
   async created() {
     const files = JSON.parse(localStorage.getItem("uploads"));
     if (files == null) return;
-    for (const file of files) {
-      file.size_megabytes =
-        Math.round((file.size / 1048576 + Number.EPSILON) * 100) / 100;
-    }
     this.files = files.reverse();
   },
 };

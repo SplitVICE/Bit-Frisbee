@@ -12,7 +12,7 @@ app.set('port', ENV.PORT);
 // MIDDLEWARES
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(CONSTANTS.FILE_STORAGE_FOLDER));
-app.use(cors());
+if (ENV.DEV_MODE) app.use(cors());
 
 // ROUTES
 app.use(require('./routes/files'));

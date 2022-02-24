@@ -10,8 +10,12 @@
           <img :src="file.file_path" :alt="file.original_name" width="28px" />
         </div>
         <div v-if="file.original_name">{{ file.original_name }}</div>
-        <div v-if="file.file_name">{{ file.file_name }}</div>
-        <div v-if="file.size_megabytes">{{ file.size_megabytes }}MB</div>
+        <a :href="file.file_path" target="_blank">
+          <div v-if="file.file_name">{{ file.file_name }}</div>
+        </a>
+        <div v-if="file.size != undefined">
+          {{ RenderReadableSize() }}
+        </div>
       </div>
       <CopyToClipboardButton
         :ToClipboard="file.file_path"
@@ -36,6 +40,7 @@
  */
 import CopyToClipboardButton from "./CopyToClipboardButton.vue";
 import Modal from "./Modal";
+const filesize = require('filesize');
 export default {
   methods: {
     LoadPreview(file) {
@@ -49,6 +54,10 @@ export default {
     CloseModal() {
       this.modalOptions.show = false;
       window.scrollTo({ top: this.modalOptions.oldTopValue });
+    },
+    RenderReadableSize() {
+      if (this.file.size == undefined) return;
+      return filesize(this.file.size, { base: 2 });
     },
   },
   components: {
@@ -89,9 +98,11 @@ export default {
   color: rgb(44, 44, 44);
   word-wrap: break-word;
 }
-.title {
-  text-align: center;
-  font-size: 60px;
+a {
+  color: rgb(156, 89, 0);
+}
+a:hover {
+  color: rgb(255, 145, 0);
 }
 @media only screen and (max-width: 426px) {
   .title {

@@ -48,11 +48,13 @@
         <!-- ////////////////////////////////////////// -->
         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
           <div class="right-container" id="right_container">
-            <div :class="right_message__host_files_show_hide">
-              <br /><br /><br /><br />
+            <div
+              :class="right_message__host_files_show_hide"
+              class="hostFilesForFree-title"
+            >
               <span class="right-container-title"> Host files for free </span>
               <span class="right-container-subtitle">
-                File size limit: unlimited
+                File size limit: {{ fileSizeLimit.readable }}
               </span>
             </div>
             <!-- Uploading files notice screen -->
@@ -82,6 +84,14 @@
         </div>
       </div>
     </div>
+    <span v-if="modalOptions.Show === true">
+      <Modal
+        :Content="modalOptions.Content"
+        ButtonOne="Ok"
+        @ButtonOneClick="modalOptions.Show = false"
+        @ToggleInvisible="modalOptions.Show = false"
+      />
+    </span>
   </div>
 </template>
 
@@ -99,6 +109,10 @@ export default {
       files: undefined, // Selected files container.
       show_uploading_message: false, // Shows an uploading message and progress bar.
       show_uploaded_files_list: false, // If there are uploaded files, the list of these will be displayed if true.
+      modalOptions: {
+        Content: "",
+        Show: false,
+      },
     };
   },
   components: {
@@ -108,7 +122,7 @@ export default {
     Modal,
   },
   computed: {
-    ...mapState(["serverHost"]),
+    ...mapState(["serverHost", "fileSizeLimit"]),
     upload_button_toggle_enable() {
       return this.file_amount > 0 ? false : true;
     },
@@ -132,18 +146,36 @@ export default {
     },
     // Event On Change when files have been selected.
     input_select_files_onChange() {
-      // DOM element of selected files button
-      const files_element = document.getElementById("input-select-files");
-      this.file_amount = files_element.files.length;
+      // Retrieve files from input type file.
+      let { files: _files } = document.getElementById("input-select-files");
+      if (_files.length === 0) return;
 
-      // Files are stored inside this.files data variable.
-      this.files = (() => {
-        const _ = [];
-        for (let i = 0; i < files_element.files.length; i++) {
-          _.push(files_element.files[i]);
+      _files = [..._files]; // Converts Objeto onto Array.
+
+      const _filesBiggerThanLimit = [];
+
+      for (let i = 0; i < _files.length; i++) {
+        if (_files[i].size > this.fileSizeLimit.bytes) {
+          _filesBiggerThanLimit.push(_files[i]);
+          _files.splice(i, 1);
         }
-        return _;
-      })();
+      }
+
+      this.file_amount = _files.length;
+      this.files = _files;
+
+      if (_filesBiggerThanLimit.length > 0) {
+        this.modalOptions.Content =
+          /* html */
+          `<div class="h1">File size limit exceeded</div>
+        The following files exceed the file size limit and were removed from the list of
+        selected files:<br><br>`;
+        for (const file of _filesBiggerThanLimit) {
+          this.modalOptions.Content += `${file.name}<br>`;
+        }
+        this.modalOptions.Show = true;
+        document.documentElement.scrollTop;
+      }
     },
     // Uploads the files to the server side.
     async upload_files() {
@@ -151,17 +183,18 @@ export default {
       this.show_uploading_message = true;
 
       const formData = new FormData();
-      this.files.forEach((file) => {
+      for (const file of this.files) {
         formData.append("files", file);
-      });
+      }
 
       const progress_bar = document.getElementById("progress_bar");
       const progress_number = document.getElementById("progress_number_upload");
 
-      const res = await axios.post(this.serverHost.api_upload, formData, {
+      const res = await axios.post(`${this.serverHost}/api/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        // DOM API function.
         onUploadProgress: (progressEvent) => {
           let percentCompleted = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
@@ -175,6 +208,9 @@ export default {
         res.data.status == "success" &&
         res.data.description == "files uploaded"
       ) {
+
+        this.file_amount = 0;
+
         this.show_uploaded_files_list = true;
 
         let uploads = [];
@@ -183,9 +219,9 @@ export default {
           uploads = JSON.parse(localStorage.getItem("uploads"));
         }
 
-        res.data.files.forEach((e) => {
-          uploads.push(e);
-        });
+        for (const file of res.data.files) {
+          uploads.push(file);
+        }
 
         localStorage.setItem("uploads", JSON.stringify(uploads));
       }
@@ -279,6 +315,9 @@ export default {
   text-align: center;
   font-size: 60px;
 }
+.hostFilesForFree-title {
+  margin-top: 100px;
+}
 @media only screen and (max-width: 426px) {
   .title {
     font-size: calc(100% + 3.2vw);
@@ -301,6 +340,16 @@ export default {
 @media screen and (max-width: 1045px) {
   .right-container-title {
     font-size: 50px;
+  }
+}
+@media screen and (max-width: 1045px) {
+  .right-container-title {
+    font-size: 50px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .hostFilesForFree-title {
+    margin-top: 30px;
   }
 }
 @media only screen and (max-width: 767px) {

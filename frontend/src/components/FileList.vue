@@ -27,10 +27,11 @@
  * Loads the definitions of uploaded files stored in the server and
  * passes the files array to the UploadedElement component using a v-for.
  */
+import { mapState } from "vuex";
 import UploadedElement from "./UploadedElement.vue";
 export default {
-  props: {
-    api_host: String,
+  computed: {
+    ...mapState(["serverHost"]),
   },
   components: {
     UploadedElement,
@@ -41,7 +42,7 @@ export default {
     };
   },
   async created() {
-    const request = await fetch(this.$props.api_host),
+    const request = await fetch(`${this.serverHost}/api/files`),
       response = await request.json();
     if (
       response.status == "failed" &&

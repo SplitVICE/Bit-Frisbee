@@ -33,7 +33,7 @@ Environment variables is the only way to configure the application.
 
  Expected value: Number.
 
-## SHOW_FILES_STORED
+ ## SHOW_FILES_STORED
 
 Location: /backend/.env
 
@@ -43,11 +43,33 @@ Default: false.
 
 Expected value: Boolean.
 
+## FILE_SIZE_LIMIT
+
+Location: /backend/.env
+
+Description: Set the max file size permitted to be uploaded. The value must be expressed in bytes.
+
+Default: 157286400 => 150MB
+
+Expected value: Number.
+
+Recommended conversion website: https://convertlive.com/u/convert/bytes/to/megabytes
+
 ## USE_HTTPS
 
  Location: /backend/.env
 
  Description: If generated URLs show have `http://` or `https://` at the beginning.
+
+ Default: false.
+
+ Expected value: Boolean.
+
+ ## DEV_MODE
+
+ Location: /backend/.env
+
+ Description: Changes backend behavior to development mode. Required to prevent errors during source code editing and hot reload.
 
  Default: false.
 
@@ -68,7 +90,7 @@ Expected value: Boolean.
   Value example:
 
  ```
- DOMAIN=bit-frisbee.com
+ DOMAIN=my-website.com
  ```
 
  ## VUE_APP_DEV_MODE
@@ -83,9 +105,9 @@ Expected value: Boolean.
 
 # Build application
 
-- Make sure  `/frontend/.env -> VUE_APP_DEV_MODE == false`.
+- Make sure  `/frontend/.env -> VUE_APP_DEV_MODE == false` and `/backend/.env -> DEV_MODE == false`.
 - Configure `/backend/.env -> DOMAIN, USE_HTTPS, SHOW_FILES_STORED, & PORT` environment variables. They can be configured later in `/build/.env`.
-- Both backend and frontend modules must be installed.
+- Both backend and frontend node modules must be installed.
 - Run `/build.py`. Builded application will be inside `/build/`.
 - Note: UNIX commands are used to create the build application.
 
@@ -95,20 +117,23 @@ To properly modify source code and have hot reload, follow these steps:
 
 - Make sure backend's port is configured to 4000. If you need a different port, change `/frontend/src/store/index.js -> _backendPort`.
 - Make sure `/frontend/.env -> VUE_APP_DEV_MODE == true`.
+- Make sure `/backend/.env -> DEV_MODE == true`.
 - Run backend `npm run dev`.
 - Run frontend `npm run serve`.
 
 # Ngrok service
 
-Application works with Ngrok service. The Ngrok URL must be set in `.env` as the following example:
+Builded application works with Ngrok service. The Ngrok URL must be set in `.env` as the following example:
 ```
 USE_HTTP=true
-DOMAIN=32af02151ce2.ngrok.io
+DOMAIN=914119.ngrok.io
 ```
 
 # Install as a service - Windows
 
-Bit Frisbee can be installed and run as a service on Windows using the module node-windows
+Bit Frisbee can be installed and run as a service on Windows using the module node-windows.
+
+Follow module instructions here:
 
 https://www.npmjs.com/package/node-windows
 

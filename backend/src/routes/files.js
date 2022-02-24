@@ -44,22 +44,14 @@ router.get('/api/files/', async (req, res) => {
         files.push({
             file_name: item,
             file_path: `${ENV.USE_HTTPS}${DOMAIN}/${item}`,
+            size: fs.statSync(require('path').join(__dirname, `../../files/${item}`)).size
         });
     }
     res.status(200).json(files);
 });
 
 // Route to upload files onto server file system from the same application..
-router.post('/api/upload/', upload.array('files'), (req, res) => {
-    uploadApi(req, res);
-});
-
-// Route to upload files onto server file system from an external source.
-router.post('/api/upload-external/', upload.array('files'), (req, res) => {
-    uploadApi(req, res);
-});
-
-const uploadApi = async (req, res) => {
+router.post('/api/upload/', upload.array('files'), async (req, res) => {
     if (req.files === undefined || req.files.length == 0) { res.status(200).json({ status: 'failed', description: 'no files provided' }); return; }
 
     const DOMAIN = await ENV.DOMAIN, files = [];
@@ -74,6 +66,6 @@ const uploadApi = async (req, res) => {
             });
     }
     res.json({ status: 'success', description: 'files uploaded', files });
-}
+});
 
 module.exports = router;

@@ -1,5 +1,9 @@
 <template>
   <div class="this container mt-5">
+    <div class="h1">
+      Sorry! /api/upload-external/ route was retired due to Multer module issue:
+      not being able to block it when a file exceeds file limit size.
+    </div>
     <div class="h1">API</div>
     Bit Frisbee counts with 1 public API.
     <hr />
@@ -8,8 +12,12 @@
     <br />
     Requires:<br />
     <b>POST - multipart/form-data request type - files=(file data here)</b>
-    <br>
-    <a href="https://github.com/SplitVICE/Bit-Frisbee/blob/master/backend/src/public/test-room/api-upload-external.html" target="_blank">Example usage</a>
+    <br />
+    <a
+      href="https://github.com/SplitVICE/Bit-Frisbee/blob/master/backend/src/public/test-room/api-upload-external.html"
+      target="_blank"
+      >Example usage</a
+    >
   </div>
 </template>
 

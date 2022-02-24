@@ -13,5 +13,8 @@ module.exports = {
 
         const localIpV4Address = require('local-ipv4-address');
         return `${await localIpV4Address()}:${process.env.PORT || 4000}`
-    })()
+    })(),
+    // https://convertlive.com/u/convert/bytes/to/megabytes
+    FILE_SIZE_LIMIT: process.env.FILE_SIZE_LIMIT || 157286400, // Expressed in Bytes. => 150MB.
+    DEV_MODE: process.env.DEV_MODE && process.env.DEV_MODE === 'true' ? true : false
 }

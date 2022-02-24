@@ -1,7 +1,6 @@
 {
   "name": "bit-frisbee-frontend",
   "version": "2.0.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --no-clean"
@@ -10,6 +9,7 @@
     "axios": "^0.26.0",
     "core-js": "^3.6.5",
     "dotenv": "^16.0.0",
+    "filesize": "^8.0.7",
     "vue": "^2.6.11",
     "vue-axios": "^3.2.4",
     "vue-router": "^3.2.0",
@@ -17,9 +17,28 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.1",
-    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-router": "^5.0.1",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "^5.0.1",
     "vue-template-compiler": "^2.6.11"
+  },
+  "author": "SPLIT VICE",
+  "license": "MIT",
+  "keywords": [
+    "SPLIT VICE",
+    "NODEJS",
+    "VUE",
+    "MULTER",
+    "BIT FRISBEE",
+    "FILE HOSTING",
+    "FILE UPLOADING"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/splitvice/bit-Frisbee"
+  },
+  "bugs": {
+    "url": "https://split-vice.com/send-message/",
+    "email": "split.vice.dev@gmail.com"
   }
 }

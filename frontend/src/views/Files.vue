@@ -7,20 +7,16 @@
       </div>
       <div class="col-12 col-sm-12 col-md-12 col-lg-7">
         <div class="title-files-stored">Files stored</div>
-        <FileList :api_host="serverHost.api_files" />
+        <FileList/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import FileList from "@/components/FileList.vue";
 import BitFrisbeePrincipalLogo from "../components/BitFrisbeePrincipalLogo.vue";
 export default {
-  computed: {
-    ...mapState(["serverHost"]),
-  },
   components: {
     FileList,
     BitFrisbeePrincipalLogo,

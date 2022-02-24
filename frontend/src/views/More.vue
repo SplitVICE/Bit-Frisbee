@@ -30,28 +30,29 @@
     </div>
 
     <div class="mt-4">
-      <a class="mt-3" href="/api">API</a>
-      <br />
+      <!-- <a class="mt-3" href="/api">API</a>
+      <br /> -->
       <a @click="ToggleShowModal" href="javascript:void(0)"
         >Delete my uploads history</a
       >
     </div>
 
-    <div class="mt-5"></div>
-    © MIT |
-    <a href="https://github.com/SplitVICE/Bit-Frisbee" target="_blank"
-      >Github</a
-    >
-    | {{ application_version }}
+    <div class="footer">
+      © MIT |
+      <a href="https://github.com/SplitVICE/Bit-Frisbee" target="_blank"
+        >Github</a
+      >
+      | {{ application_version }}
+    </div>
     <span v-if="show_modal == true">
-    <Modal
-      Content="<div class='h1'>Delete uploads history</div>This action cannot be undone. Are you sure?"
-      ButtonOne="Delete history"
-      ButtonTwo="Cancel"
-      @ButtonOneClick="delete_uploads_history"
-      @ButtonTwoClick="ToggleShowModal"
-      @ToggleInvisible="ToggleShowModal"
-    />
+      <Modal
+        Content="<div class='h1'>Delete uploads history</div>This action cannot be undone. Are you sure?"
+        ButtonOne="Delete history"
+        ButtonTwo="Cancel"
+        @ButtonOneClick="delete_uploads_history"
+        @ButtonTwoClick="ToggleShowModal"
+        @ToggleInvisible="ToggleShowModal"
+      />
     </span>
   </div>
 </template>
@@ -76,6 +77,9 @@ a {
 .margin-top {
   margin-top: 50px;
 }
+.footer {
+  margin-top: 30px;
+}
 @media only screen and (max-width: 373px) {
   .margin-top {
     margin-top: 5px;
@@ -90,8 +94,8 @@ import Modal from "../components/Modal.vue";
 export default {
   data() {
     return {
-      show_modal: false
-    }
+      show_modal: false,
+    };
   },
   components: {
     BitFrisbeePrincipalLogo,
@@ -101,7 +105,7 @@ export default {
     ...mapState(["application_version"]),
   },
   methods: {
-    ToggleShowModal(){
+    ToggleShowModal() {
       this.show_modal = !this.show_modal;
     },
     delete_uploads_history() {
