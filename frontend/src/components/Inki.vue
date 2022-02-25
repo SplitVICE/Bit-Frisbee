@@ -1,6 +1,6 @@
 <template>
   <div class="ctx" v-if="Options.show === true">
-    <img src="https://i.imgur.com/b4OxGWA.png" alt="inki" />
+    <img width="60px" src="https://dl.dropboxusercontent.com/s/1q3ff3lzh6amojd/inki.png" alt="inki" />
   </div>
 </template>
 
